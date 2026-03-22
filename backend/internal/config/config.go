@@ -83,6 +83,7 @@ type Config struct {
 	Gemini                  GeminiConfig                  `mapstructure:"gemini"`
 	Update                  UpdateConfig                  `mapstructure:"update"`
 	Idempotency             IdempotencyConfig             `mapstructure:"idempotency"`
+	Kiro                    KiroConfig                    `mapstructure:"kiro"`
 }
 
 type LogConfig struct {
@@ -2366,3 +2367,52 @@ func warnIfInsecureURL(field, raw string) {
 		slog.Warn("url uses http scheme; use https in production to avoid token leakage", "field", field)
 	}
 }
+
+// KiroConfig Kiro 平台配置
+type KiroConfig struct {
+	// HybridSchedulingEnabled 是否启用混合调度模式
+	// 启用后，通用端点 /v1/messages 也会路由到 Kiro 账号
+	HybridSchedulingEnabled bool `mapstructure:"hybrid_scheduling_enabled"`
+
+	// OAuth 配置
+	OAuth KiroOAuthConfig `mapstructure:"oauth"`
+
+	// Upstream 上游 API 配置
+	Upstream KiroUpstreamConfig `mapstructure:"upstream"`
+
+	// ErrorPolicy 错误处理策略
+	ErrorPolicy KiroErrorPolicyConfig `mapstructure:"error_policy"`
+}
+
+// KiroOAuthConfig Kiro OAuth 配置
+type KiroOAuthConfig struct {
+	// Social 认证配置
+	SocialAuthURL  string `mapstructure:"social_auth_url"`
+	SocialTokenURL string `mapstructure:"social_token_url"`
+
+	// IdC 认证配置
+	IdCAuthURL  string `mapstructure:"idc_auth_url"`
+	IdCTokenURL string `mapstructure:"idc_token_url"`
+}
+
+// KiroUpstreamConfig Kiro 上游 API 配置
+type KiroUpstreamConfig struct {
+	// BaseURL 默认 API 地址
+	BaseURL string `mapstructure:"base_url"`
+
+	// Timeout 请求超时时间
+	Timeout time.Duration `mapstructure:"timeout"`
+}
+
+// KiroErrorPolicyConfig Kiro 错误处理策略配置
+type KiroErrorPolicyConfig struct {
+	// MaxRetriesPerCredential 单凭据最大重试次数
+	MaxRetriesPerCredential int `mapstructure:"max_retries_per_credential"`
+
+	// MaxRetriesPerRequest 单请求最大重试次数（跨凭据）
+	MaxRetriesPerRequest int `mapstructure:"max_retries_per_request"`
+
+	// DisableOn402 是否在 402 错误时禁用凭据
+	DisableOn402 bool `mapstructure:"disable_on_402"`
+}
+

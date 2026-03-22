@@ -23,6 +23,7 @@ const (
 	PlatformGemini      = "gemini"
 	PlatformAntigravity = "antigravity"
 	PlatformSora        = "sora"
+	PlatformKiro        = "kiro"
 )
 
 // Account type constants
@@ -112,4 +113,20 @@ var DefaultAntigravityModelMapping = map[string]string{
 	// 其他官方模型
 	"gpt-oss-120b-medium":    "gpt-oss-120b-medium",
 	"tab_flash_lite_preview": "tab_flash_lite_preview",
+}
+
+// DefaultKiroModelMapping 是 Kiro 平台的默认模型映射
+// 基于 kiro.rs 的模型映射规则
+var DefaultKiroModelMapping = map[string]string{
+	// Claude Sonnet 系列
+	"claude-sonnet-4-6":          "claude-sonnet-4.5",
+	"claude-sonnet-4-5":          "claude-sonnet-4.5",
+	"claude-sonnet-4-5-20250929": "claude-sonnet-4.5",
+	// Claude Opus 系列
+	"claude-opus-4-6":          "claude-opus-4.5",
+	"claude-opus-4-5":          "claude-opus-4.5",
+	"claude-opus-4-5-20251101": "claude-opus-4.5",
+	// Claude Haiku 系列
+	"claude-haiku-4-5":          "claude-haiku-4.5",
+	"claude-haiku-4-5-20251001": "claude-haiku-4.5",
 }

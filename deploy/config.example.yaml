@@ -993,3 +993,48 @@ update:
   # Leave empty for direct connection (recommended for overseas servers)
   # 留空表示直连（适用于海外服务器）
   proxy_url: ""
+
+# =============================================================================
+# Kiro Configuration (Kiro 平台配置)
+# =============================================================================
+kiro:
+  # Enable hybrid scheduling mode (route /v1/messages to Kiro accounts)
+  # 启用混合调度模式（将 /v1/messages 路由到 Kiro 账号）
+  hybrid_scheduling_enabled: false
+
+  # OAuth configuration (OAuth 配置)
+  oauth:
+    # Social authentication (Builder ID)
+    # Social 认证（Builder ID）
+    social_auth_url: "https://api.kiro.so/oauth/authorize"
+    social_token_url: "https://api.kiro.so/oauth/token"
+
+    # IdC authentication (Enterprise)
+    # IdC 认证（企业版）
+    idc_auth_url: "https://api.kiro.so/oauth/authorize"
+    idc_token_url: "https://api.kiro.so/oauth/token"
+
+  # Upstream API configuration (上游 API 配置)
+  upstream:
+    # Default API base URL
+    # 默认 API 地址
+    base_url: "https://api.kiro.so"
+
+    # Request timeout (seconds)
+    # 请求超时时间（秒）
+    timeout: 120s
+
+  # Error handling policy (错误处理策略)
+  error_policy:
+    # Max retries per credential
+    # 单凭据最大重试次数
+    max_retries_per_credential: 3
+
+    # Max retries per request (across credentials)
+    # 单请求最大重试次数（跨凭据）
+    max_retries_per_request: 9
+
+    # Disable credential on 402 error (quota exhausted)
+    # 在 402 错误时禁用凭据（配额耗尽）
+    disable_on_402: true
+
