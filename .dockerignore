@@ -15,7 +15,6 @@ docs/
 # docs/legal/*.md?raw into the frontend bundle; keep that subtree in the
 # Docker build context even though docs/ is otherwise excluded.
 !docs/legal/
-!docs/legal/*.md
 
 # IDE
 .idea/
